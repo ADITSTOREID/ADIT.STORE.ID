@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050814">
+<title>ADIT STORE — Top Up MLBB & Free Fire</title>
+<style>
+:root{
+  --bg:#050814; --panel:#0b1020; --panel2:#11182d; --line:#26365e;
+  --text:#f7f9ff; --muted:#9ca8c7; --blue:#18a7ff; --cyan:#36e7ff;
+  --gold:#ffd21a; --orange:#ff8a00; --green:#19e28c; --danger:#ff4d73;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--text); background:
+  radial-gradient(circle at 15% 10%,rgba(24,167,255,.18),transparent 28%),
+  radial-gradient(circle at 85% 18%,rgba(255,210,26,.12),transparent 25%),
+  linear-gradient(135deg,#03050d,#080d1d 55%,#050814);
+  min-height:100vh;
+}
+body:before{
+  content:""; position:fixed; inset:0; pointer-events:none; opacity:.22;
+  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:40px 40px; mask-image:linear-gradient(to bottom,#000,transparent 85%);
+}
+.container{width:min(1180px,92%);margin:auto}
+header{
+  position:sticky;top:0;z-index:20;background:rgba(4,7,16,.84);
+  backdrop-filter:blur(16px);border-bottom:1px solid rgba(54,231,255,.16)
+}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-weight:1000;letter-spacing:1px;font-size:1.35rem}
+.brand span{color:var(--cyan)}
+nav a{color:#dce5ff;text-decoration:none;margin-left:20px;font-weight:800;font-size:.92rem}
+nav a:hover{color:var(--cyan)}
+.hero{padding:70px 0 45px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:32px;align-items:center}
+.badge{display:inline-flex;gap:8px;align-items:center;border:1px solid rgba(54,231,255,.35);background:rgba(24,167,255,.08);padding:8px 14px;border-radius:999px;color:var(--cyan);font-weight:900;font-size:.78rem}
+h1{font-size:clamp(2.5rem,7vw,5.6rem);line-height:.92;margin:20px 0;font-weight:1000;letter-spacing:-3px;text-transform:uppercase}
+.gradient{background:linear-gradient(90deg,#fff,#5ceaff 45%,#168cff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);font-size:1.06rem;max-width:620px;line-height:1.7}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{border:0;border-radius:12px;padding:13px 18px;font-weight:950;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-primary{background:linear-gradient(135deg,var(--cyan),#0878ff);color:#03101d;box-shadow:0 12px 30px rgba(24,167,255,.2)}
+.btn-ghost{border:1px solid #31446e;background:#0c1325;color:#fff}
+.btn-gold{background:linear-gradient(135deg,#fff000,#ff9b00);color:#171000}
+.hero-card{
+  min-height:310px;border:1px solid #25355f;border-radius:26px;padding:26px;
+  background:linear-gradient(145deg,rgba(17,24,45,.96),rgba(5,8,20,.94));
+  box-shadow:0 30px 80px rgba(0,0,0,.45);position:relative;overflow:hidden
+}
+.hero-card:after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;right:-70px;top:-70px;background:rgba(54,231,255,.15);filter:blur(5px)}
+.stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}
+.stat{padding:17px;border-radius:16px;background:#0c1429;border:1px solid #263a68}
+.stat b{display:block;font-size:1.45rem;color:var(--cyan)}
+.stat small{color:var(--muted)}
+.section{padding:32px 0 65px}
+.section-title{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:20px}
+.section-title h2{font-size:2rem}
+.section-title p{color:var(--muted)}
+.tabs{display:flex;gap:10px;margin:15px 0 20px}
+.tab{flex:1;padding:14px;border-radius:13px;background:#0b1224;color:#aab7d5;border:1px solid #24375f;font-weight:1000;cursor:pointer}
+.tab.active.mlbb{background:linear-gradient(135deg,#087dff,#1bdfff);color:#03101b}
+.tab.active.ff{background:linear-gradient(135deg,#ffd21a,#ff7800);color:#160d00}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+input,select{
+  background:#080e1d;border:1px solid #293b64;color:#fff;border-radius:12px;
+  padding:13px 14px;outline:none;font:inherit
+}
+.search{flex:1;min-width:200px}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.price-card{
+  background:linear-gradient(145deg,#0d1529,#080d1a);border:1px solid #23365f;
+  border-radius:16px;padding:16px;transition:.2s;position:relative
+}
+.price-card:hover{transform:translateY(-3px);border-color:var(--cyan);box-shadow:0 12px 30px rgba(0,174,255,.12)}
+.price-card .game{font-size:.72rem;color:var(--muted);font-weight:800}
+.price-card h3{font-size:1.2rem;margin:7px 0}
+.price{font-size:1.25rem;font-weight:1000;color:var(--gold)}
+.price-card button{width:100%;margin-top:12px}
+.notice{
+  margin-top:20px;padding:16px;border-radius:15px;border:1px dashed #355081;
+  color:#bac6e3;background:rgba(9,17,35,.7);line-height:1.6
+}
+.order{
+  display:grid;grid-template-columns:.9fr 1.1fr;gap:18px
+}
+.box{background:linear-gradient(145deg,#0c1326,#080d19);border:1px solid #24365e;border-radius:20px;padding:22px}
+.box h3{margin-bottom:14px}
+.form{display:grid;gap:12px}
+label{font-size:.78rem;color:#9eabca;font-weight:900}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.summary{display:grid;gap:10px;margin-top:15px}
+.summary div{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid #1d2a48}
+.total{font-size:1.35rem;font-weight:1000;color:var(--gold)}
+footer{padding:35px 0;border-top:1px solid #172542;color:#8491af}
+.footer-flex{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#101b33;border:1px solid #315181;padding:13px 17px;border-radius:12px;z-index:50;transition:.25s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.hidden{display:none!important}
+@media(max-width:900px){
+  .hero-grid,.order{grid-template-columns:1fr}
+  .price-grid{grid-template-columns:repeat(2,1fr)}
+  nav{display:none}
+}
+@media(max-width:560px){
+  .hero{padding-top:45px}
+  h1{letter-spacing:-1.5px}
+  .price-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .section-title{display:block}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <div class="brand">⚡ ADIT <span>STORE</span></div>
+    <nav>
+      <a href="#harga">Harga</a><a href="#order">Order</a><a href="#pembayaran">Pembayaran</a><a href="#cara">Cara Order</a><a href="#kontak">Admin</a>
+    </nav>
+    <a class="btn btn-primary" href="#order">TOP UP</a>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+<div class="container hero-grid">
+  <div>
+    <span class="badge">🎮 TOP UP GAME • CEPAT • AMAN • TERPERCAYA</span>
+    <h1>TOP UP <span class="gradient">MLBB & FREE FIRE</span></h1>
+    <p>Isi Diamond dengan harga sesuai daftar ADIT STORE. Pilih game, nominal, masukkan ID, lalu kirim order langsung ke admin WhatsApp.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#harga">💎 LIHAT HARGA</a>
+      <a class="btn btn-gold" href="#order">🚀 ORDER SEKARANG</a>
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="badge">🔥 ADIT STORE</div>
+    <h2 style="font-size:2rem;margin-top:18px">Gaming Store</h2>
+    <p style="margin-top:8px;color:#9ca8c7">Top up praktis dari HP. Tampilan responsive dan siap di-upload ke hosting.</p>
+    <div class="stat-grid">
+      <div class="stat"><b>MLBB</b><small>Diamond</small></div>
+      <div class="stat"><b>FF</b><small>Diamond</small></div>
+      <div class="stat"><b>24/7</b><small>Order via Admin</small></div>
+      <div class="stat"><b>WA</b><small>087899311799</small></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<section class="section" id="harga">
+<div class="container">
+  <div class="section-title">
+    <div><h2>💎 Daftar Harga</h2><p>Pilih game untuk melihat semua nominal.</p></div>
+  </div>
+  <div class="tabs">
+    <button class="tab active mlbb" data-game="mlbb">MOBILE LEGENDS</button>
+    <button class="tab ff" data-game="ff">FREE FIRE</button>
+  </div>
+  <div class="toolbar">
+    <input id="search" class="search" placeholder="🔎 Cari nominal, contoh: 100 DM">
+    <select id="sort">
+      <option value="asc">Harga termurah</option>
+      <option value="desc">Harga termahal</option>
+    </select>
+  </div>
+  <div id="priceGrid" class="price-grid"></div>
+  <div class="notice">⚠️ Harga di website mengikuti daftar yang diberikan. Sebelum pembayaran, cek kembali nominal dan total pesanan dengan admin.</div>
+</div>
+</section>
+
+<section class="section" id="order">
+<div class="container">
+  <div class="section-title"><div><h2>🚀 Buat Pesanan</h2><p>Isi data di bawah, lalu kirim detail order ke WhatsApp admin.</p></div></div>
+  <div class="order">
+    <div class="box">
+      <h3>1. Pilih Produk</h3>
+      <div class="form">
+        <div>
+          <label>GAME</label>
+          <select id="gameSelect">
+            <option value="mlbb">Mobile Legends</option>
+            <option value="ff">Free Fire</option>
+          </select>
+        </div>
+        <div>
+          <label>NOMINAL</label>
+          <select id="nominalSelect"></select>
+        </div>
+        <div class="form-row">
+          <div><label>ID GAME</label><input id="gameId" placeholder="Contoh: 123456789"></div>
+          <div><label>SERVER / ZONE (MLBB)</label><input id="zone" placeholder="Contoh: 1234"></div>
+        </div>
+        <div>
+          <label>NAMA PEMBELI (OPSIONAL)</label>
+          <input id="buyer" placeholder="Nama kamu">
+        </div>
+        <div>
+          <label>METODE PEMBAYARAN</label>
+          <select id="payment">
+            <option>GoPay</option>
+            <option>DANA</option>
+            <option>QRIS</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="box">
+      <h3>2. Ringkasan Pesanan</h3>
+      <div class="summary">
+        <div><span>Game</span><b id="sumGame">Mobile Legends</b></div>
+        <div><span>Nominal</span><b id="sumNominal">-</b></div>
+        <div><span>Harga</span><b id="sumPrice">Rp0</b></div>
+        <div><span>Pembayaran</span><b id="sumPayment">GoPay</b></div>
+        <div class="total"><span>Total</span><b id="sumTotal">Rp0</b></div>
+      </div>
+      <button id="orderBtn" class="btn btn-primary" style="width:100%;margin-top:18px">📲 KIRIM ORDER KE ADMIN</button>
+      <p style="font-size:.78rem;color:#8795b5;margin-top:12px;line-height:1.5">Admin: <b style="color:#fff">087899311799</b>. Pastikan ID game sudah benar sebelum order.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<section class="section" id="pembayaran">
+<div class="container">
+  <div class="section-title">
+    <div><h2>💳 Metode Pembayaran</h2><p>Pilih salah satu metode pembayaran yang tersedia.</p></div>
+  </div>
+  <div class="price-grid">
+    <div class="price-card">
+      <div class="game">PAYMENT 01</div>
+      <h3>💙 GoPay</h3>
+      <p style="color:#9ca8c7;line-height:1.6">Pembayaran melalui GoPay. Konfirmasi pembayaran kepada admin setelah transfer.</p>
+    </div>
+    <div class="price-card">
+      <div class="game">PAYMENT 02</div>
+      <h3>🔵 DANA</h3>
+      <p style="color:#9ca8c7;line-height:1.6">Pembayaran melalui DANA. Pastikan nominal pembayaran sesuai total order.</p>
+    </div>
+    <div class="price-card">
+      <div class="game">PAYMENT 03</div>
+      <h3>▦ QRIS</h3>
+      <p style="color:#9ca8c7;line-height:1.6">Bayar dengan QRIS. Minta QRIS pembayaran terbaru kepada admin sebelum melakukan pembayaran.</p>
+    </div>
+  </div>
+  <div class="notice">
+    🔐 <b>Penting:</b> Jangan melakukan pembayaran ke rekening/nomor yang bukan diberikan langsung oleh admin ADIT STORE.
+    Setelah pembayaran, kirim bukti pembayaran ke admin WhatsApp <b>087899311799</b>.
+  </div>
+</div>
+</section>
+
+<section class="section" id="cara">
+<div class="container">
+  <div class="section-title"><div><h2>📋 Cara Order</h2><p>Simple dan cepat.</p></div></div>
+  <div class="price-grid">
+    <div class="price-card"><div class="game">STEP 01</div><h3>Pilih Game</h3><p style="color:#9ca8c7">Pilih Mobile Legends atau Free Fire.</p></div>
+    <div class="price-card"><div class="game">STEP 02</div><h3>Pilih Nominal</h3><p style="color:#9ca8c7">Pilih Diamond sesuai kebutuhan.</p></div>
+    <div class="price-card"><div class="game">STEP 03</div><h3>Isi ID</h3><p style="color:#9ca8c7">Masukkan ID game dengan teliti.</p></div>
+    <div class="price-card"><div class="game">STEP 04</div><h3>Bayar & Proses</h3><p style="color:#9ca8c7">Ikuti instruksi admin untuk pembayaran dan proses top up.</p></div>
+  </div>
+</div>
+</section>
+</main>
+
+<footer id="kontak">
+<div class="container footer-flex">
+  <div><b>⚡ ADIT STORE</b><div style="margin-top:7px">Top Up MLBB & Free Fire</div></div>
+  <div>Admin WhatsApp: <b>087899311799</b></div>
+</div>
+</footer>
+<div id="toast" class="toast">Pesanan disalin.</div>
+
+<script>
+const MLBB = [
+["15 DM",5000],["20 DM",7000],["23 DM",8000],["28 DM",10000],["30 DM",11000],
+["33 DM",12000],["36 DM",14000],["40 DM",15000],["44 DM",17000],["46 DM",18000],
+["50 DM",19000],["54 DM",20000],["59 DM",22000],["64 DM",23000],["66 DM",24000],
+["70 DM",25000],["75 DM",26000],["80 DM",27000],["85 DM",29000],["92 DM",30000],
+["100 DM",35000],["110 DM",36000],["128 DM",40000],["140 DM",45000],["150 DM",48000],
+["154 DM",50000],["170 DM",55000],["185 DM",60000],["200 DM",65000]
+];
+
+const FF = [
+["29 DM",5000],["36 DM",6000],["48 DM",8000],["55 DM",9000],["70 DM",10000],
+["80 DM",11000],["90 DM",13000],["100 DM",14000],["120 DM",16000],["130 DM",18000],
+["140 DM",20000],["150 DM",21000],["160 DM",22000],["170 DM",24000],["180 DM",25000],
+["190 DM",26000],["200 DM",27000],["210 DM",28000],["225 DM",30000],["230 DM",32000],
+["240 DM",34000],["250 DM",36000],["260 DM",38000],["280 DM",40000],["330 DM",45000],
+["355 DM",46000],["365 DM",50000],["425 DM",55000],["455 DM",60000],["480 DM",63000],
+["500 DM",65000],["520 DM",68000],["550 DM",72000],["600 DM",80000],["640 DM",86000],
+["655 DM",88000],["700 DM",90000],["720 DM",92000],["750 DM",95000],["770 DM",98000],
+["800 DM",103000],["840 DM",105000],["860 DM",110000],["890 DM",115000],["925 DM",117000],
+["960 DM",125000],["1000 DM",130000],["1050 DM",135000],["1080 DM",138000],["1150 DM",145000],
+["1200 DM",150000],["1300 DM",170000],["1400 DM",178000],["1580 DM",200000],["1600 DM",210000],
+["1795 DM",235000],["1800 DM",238000],["1900 DM",250000],["2000 DM",260000]
+];
+
+let currentGame="mlbb";
+const rupiah=n=>new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",maximumFractionDigits:0}).format(n);
+const data=()=>currentGame==="mlbb"?MLBB:FF;
+
+function renderPrices(){
+  const q=document.getElementById("search").value.toLowerCase().trim();
+  const order=document.getElementById("sort").value;
+  let arr=data().filter(x=>x[0].toLowerCase().includes(q));
+  arr.sort((a,b)=>order==="asc"?a[1]-b[1]:b[1]-a[1]);
+  document.getElementById("priceGrid").innerHTML=arr.map(x=>`
+    <div class="price-card">
+      <div class="game">${currentGame==="mlbb"?"MOBILE LEGENDS":"FREE FIRE"}</div>
+      <h3>💎 ${x[0]}</h3>
+      <div class="price">${rupiah(x[1])}</div>
+      <button class="btn ${currentGame==="mlbb"?"btn-primary":"btn-gold"}" onclick="choose('${x[0]}')">PILIH NOMINAL</button>
+    </div>`).join("") || `<div class="notice">Nominal tidak ditemukan.</div>`;
+  updateNominals();
+}
+function updateNominals(){
+  const sel=document.getElementById("nominalSelect");
+  sel.innerHTML=data().map(x=>`<option value="${x[0]}">${x[0]} — ${rupiah(x[1])}</option>`).join("");
+  updateSummary();
+}
+function choose(nom){
+  document.getElementById("nominalSelect").value=nom;
+  updateSummary();
+  document.getElementById("order").scrollIntoView({behavior:"smooth"});
+}
+function updateSummary(){
+  const g=document.getElementById("gameSelect").value;
+  const arr=g==="mlbb"?MLBB:FF;
+  const n=document.getElementById("nominalSelect").value;
+  const item=arr.find(x=>x[0]===n);
+  document.getElementById("sumGame").textContent=g==="mlbb"?"Mobile Legends":"Free Fire";
+  document.getElementById("sumNominal").textContent=n||"-";
+  document.getElementById("sumPrice").textContent=item?rupiah(item[1]):"Rp0";
+  document.getElementById("sumTotal").textContent=item?rupiah(item[1]):"Rp0";
+  document.getElementById("sumPayment").textContent=document.getElementById("payment").value;
+}
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
+  currentGame=t.dataset.game;
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  t.classList.add("active");
+  document.getElementById("gameSelect").value=currentGame;
+  document.getElementById("search").value="";
+  renderPrices();
+}));
+document.getElementById("search").addEventListener("input",renderPrices);
+document.getElementById("sort").addEventListener("change",renderPrices);
+document.getElementById("gameSelect").addEventListener("change",e=>{
+  currentGame=e.target.value;
+  document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x.dataset.game===currentGame));
+  renderPrices();
+});
+document.getElementById("nominalSelect").addEventListener("change",updateSummary);
+document.getElementById("payment").addEventListener("change",updateSummary);
+
+document.getElementById("orderBtn").addEventListener("click",()=>{
+  const g=document.getElementById("gameSelect").value;
+  const gameName=g==="mlbb"?"Mobile Legends":"Free Fire";
+  const nominal=document.getElementById("nominalSelect").value;
+  const arr=g==="mlbb"?MLBB:FF;
+  const item=arr.find(x=>x[0]===nominal);
+  const id=document.getElementById("gameId").value.trim();
+  const zone=document.getElementById("zone").value.trim();
+  const buyer=document.getElementById("buyer").value.trim()||"-";
+  if(!id){alert("Silakan isi ID game terlebih dahulu.");document.getElementById("gameId").focus();return;}
+  let msg=`Halo Admin ADIT STORE 👋%0A%0ASaya ingin order:%0A🎮 Game: ${gameName}%0A💎 Nominal: ${nominal}%0A💰 Harga: ${rupiah(item[1])}%0A🆔 ID: ${id}`;
+  if(g==="mlbb" && zone) msg+=`%0A🌐 Server: ${zone}`;
+  const payment=document.getElementById("payment").value;
+  msg+=`%0A💳 Pembayaran: ${payment}%0A👤 Nama: ${buyer}%0A%0AMohon diproses. Terima kasih!`;
+  window.open("https://wa.me/6287899311799?text="+msg,"_blank");
+});
+renderPrices();
+</script>
+</body>
+</html>
